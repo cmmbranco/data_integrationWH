@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<job xmlns="http://eobjects.org/analyzerbeans/job/1.0">
+    <job-metadata>
+        <job-description>Created with DataCleaner Community edition 5.2.0</job-description>
+        <author>aid</author>
+        <updated-date>2019-11-12Z</updated-date>
+        <metadata-properties>
+            <property name="CoordinatesX.sakila.address">135</property>
+            <property name="CoordinatesX.sequelmovie.movie">255</property>
+            <property name="CoordinatesX.sakila.film_actor">190</property>
+            <property name="CoordinatesY.sakila.film">189</property>
+            <property name="CoordinatesY.sakila.film_actor">233</property>
+            <property name="CoordinatesY.sakila.actor">213</property>
+            <property name="CoordinatesY.sequelmovie.movie">175</property>
+            <property name="CoordinatesY.sakila.address">119</property>
+            <property name="CoordinatesX.sakila.actor">174</property>
+            <property name="CoordinatesX.sakila.film">292</property>
+        </metadata-properties>
+    </job-metadata>
+    <source>
+        <data-context ref="sakila"/>
+        <columns>
+            <column id="col_movietitle" path="sequelmovie.movie.movieTitle" type="VARCHAR"/>
+            <column id="col_moviedesc" path="sequelmovie.movie.movieDesc" type="VARCHAR"/>
+        </columns>
+    </source>
+    <transformation/>
+    <analysis>
+        <analyzer>
+            <descriptor ref="String analyzer"/>
+            <metadata-properties>
+                <property name="CoordinatesY">174</property>
+                <property name="CoordinatesX">457</property>
+            </metadata-properties>
+            <properties/>
+            <input ref="col_movietitle"/>
+            <input ref="col_moviedesc"/>
+        </analyzer>
+    </analysis>
+</job>

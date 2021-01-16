@@ -1,0 +1,25 @@
+select last_name,city,country
+from
+(select last_name, city, c.city_id, d.country_id
+from
+(select last_name,a.city_id
+from customer as b
+INNER JOIN
+address as a
+ON b.address_id = a.address_id) as c
+
+INNER JOIN
+
+city as d
+
+ON c.city_id = d.city_id) as e
+
+INNER JOIN
+
+country as f
+
+ON e.country_id = f.country_id
+
+
+
+

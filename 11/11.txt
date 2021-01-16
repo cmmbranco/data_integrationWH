@@ -1,0 +1,18 @@
+WITH 
+SET [South America Countries] AS {[Customer].[Country].[Argentina], 
+[Customer].[Country].[Bolivia], 
+[Customer].[Country].[Brazil], 
+[Customer].[Country].[Chile], 
+[Customer].[Country].[Colombia], 
+[Customer].[Country].[Ecuador],
+[Customer].[Country].[Paraguay], 
+[Customer].[Country].[Peru],
+[Customer].[Country].[Venezuela],
+[Customer].[Country].[French Guiana]}
+MEMBER Measures.[Previous Month] AS Time.Month.CurrentMember.PrevMember
+MEMBER Measures.[Sales Growth] AS Measures.Sales - Measures.[Previous Month]
+SELECT {Measures.Sales,
+Measures.[Previous Month],
+Measures.[Sales Growth]} ON COLUMNS,
+[South America Countries] * {DRILLDOWNLEVEL(Time.Year.Members)} ON ROWS
+FROM Rentals

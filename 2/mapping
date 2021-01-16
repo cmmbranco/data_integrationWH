@@ -1,0 +1,101 @@
+--
+-- all_films(film_id, title, description, length, rating, category)
+--
+create view all_films(film_id, title, description, length, rating, category) as
+(select CONCAT("m_",movieID) as film_id, movieTitle as title, movieDesc as description, movieRuntime as length, movieRating as rating, genreType as genre 
+from 
+(select movieID, movieTitle, movieDesc, movieRuntime, movieRating
+from sequelmovie.movie) as a
+
+INNER JOIN
+
+(select g.genreType, mg.m_movieID
+from sequelmovie.genre AS g, sequelmovie.movie_genre AS mg
+where g.genreID = mg.g_genreID) as b
+
+on a.movieID = b.m_movieID
+)
+
+
+UNION
+
+
+(select  CONCAT("s_",p1.film_id), title, description , length , rating , category
+from 
+(select film_id, title, description , length , rating
+from sakila.film) as p1
+
+INNER JOIN
+
+(select a.film_id, name as category
+from sakila.film_category as a, sakila.category as b 
+where a.category_id = b.category_id) as p2
+
+ON p1.film_id = p2.film_id)
+
+;
+
+
+
+---
+---all_actors(actor_id, first_name, last_name)
+---
+
+create view all_actors(actor_id, first_name, last_name) as
+(select CONCAT("m_",personID) as actor_id, personFirstName as first_name, personLastName as last_name
+from
+(select personID, personFirstName, personLastName
+from sequelmovie.person) as a
+
+INNER JOIN
+
+(select p_personID, m_movieID
+from sequelmovie.role as r
+where r.roleDesc like '%Actor%'
+) as b
+
+ON a.personID = b.p_personID)
+
+UNION	
+
+( select CONCAT("s_",actor_id), first_name, last_name
+from sakila.actor)
+;
+
+
+
+
+
+
+
+---
+---all_film_act(film_id, actor_id)
+---	film_id: FK(all_films)
+	actor_id: FK(all_actors)
+
+create view all_film_act(film_id, actor_id) as
+(select film_id,actor_id from
+	(select film_id from all_films) as a 
+
+	INNER JOIN
+
+	(select * from all_actors as a, sequelmovie.role as r 
+		where a.actor_id =  CONCAT("se",r.p_personID)) as b
+	
+	ON CONCAT("m_",b.m_movieID) = a.film_id)
+
+
+UNION
+
+(select a.film_id, actor_id from
+	(select film_id from all_films) as a 
+
+	INNER JOIN
+
+	(select CONCAT("s_",film_id) as film_id, CONCAT("s_",r.actor_id) as actor_id from all_actors as a, sakila.film_actor as r 
+		where a.actor_id = CONCAT("s_",r.actor_id)) as b
+	
+	ON b.film_id = a.film_id)
+
+
+;

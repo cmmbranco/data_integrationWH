@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<job xmlns="http://eobjects.org/analyzerbeans/job/1.0">
+    <job-metadata>
+        <job-description>Created with DataCleaner Community edition 5.2.0</job-description>
+        <author>aid</author>
+        <updated-date>2019-11-12Z</updated-date>
+        <metadata-properties>
+            <property name="CoordinatesX.sakila.address">135</property>
+            <property name="CoordinatesX.sakila.film_actor">190</property>
+            <property name="CoordinatesY.sakila.film_actor">233</property>
+            <property name="CoordinatesY.sakila.actor">213</property>
+            <property name="CoordinatesY.sakila.address">119</property>
+            <property name="CoordinatesX.sakila.actor">174</property>
+        </metadata-properties>
+    </job-metadata>
+    <source>
+        <data-context ref="sakila"/>
+        <columns>
+            <column id="col_actor_id" path="sakila.actor.actor_id" type="SMALLINT"/>
+            <column id="col_first_name" path="sakila.actor.first_name" type="VARCHAR"/>
+            <column id="col_last_name" path="sakila.actor.last_name" type="VARCHAR"/>
+            <column id="col_last_update" path="sakila.actor.last_update" type="TIMESTAMP"/>
+        </columns>
+    </source>
+    <transformation/>
+    <analysis>
+        <analyzer>
+            <descriptor ref="Value distribution"/>
+            <metadata-properties>
+                <property name="CoordinatesY">206</property>
+                <property name="CoordinatesX">371</property>
+            </metadata-properties>
+            <properties>
+                <property name="Record unique values" value="true"/>
+                <property name="Record drill-down information" value="true"/>
+                <property name="Top n most frequent values" value="&lt;null&gt;"/>
+                <property name="Bottom n most frequent values" value="&lt;null&gt;"/>
+            </properties>
+            <input ref="col_first_name" name="Column"/>
+            <input ref="col_last_name" name="Column"/>
+        </analyzer>
+    </analysis>
+</job>

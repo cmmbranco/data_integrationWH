@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<job xmlns="http://eobjects.org/analyzerbeans/job/1.0">
+    <job-metadata>
+        <job-description>Created with DataCleaner Community edition 5.2.0</job-description>
+        <author>aid</author>
+        <updated-date>2019-11-12Z</updated-date>
+        <metadata-properties>
+            <property name="CoordinatesX.sakila.address">135</property>
+            <property name="CoordinatesX.sakila.film_actor">190</property>
+            <property name="CoordinatesY.sakila.film">205</property>
+            <property name="CoordinatesY.sakila.film_actor">233</property>
+            <property name="CoordinatesY.sakila.actor">213</property>
+            <property name="CoordinatesY.sakila.address">119</property>
+            <property name="CoordinatesX.sakila.actor">174</property>
+            <property name="CoordinatesX.sakila.film">267</property>
+        </metadata-properties>
+    </job-metadata>
+    <source>
+        <data-context ref="sakila"/>
+        <columns>
+            <column id="col_film_id" path="sakila.film.film_id" type="SMALLINT"/>
+            <column id="col_rental_duration" path="sakila.film.rental_duration" type="TINYINT"/>
+        </columns>
+    </source>
+    <transformation/>
+    <analysis>
+        <analyzer>
+            <descriptor ref="Number analyzer"/>
+            <metadata-properties>
+                <property name="CoordinatesY">196</property>
+                <property name="CoordinatesX">487</property>
+            </metadata-properties>
+            <properties>
+                <property name="Descriptive statistics" value="false"/>
+            </properties>
+            <input ref="col_film_id"/>
+            <input ref="col_rental_duration"/>
+        </analyzer>
+    </analysis>
+</job>

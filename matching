@@ -1,0 +1,29 @@
+all_films(film_id, title, description, length, rating, category)
+
+sequel.movie.movieID === film_id
+sequel.movie.movieTitle === title
+sequel.movie.movieDesc === description
+sequel.movie.movieRuntime === length
+sequel.movie.movieRating === rating
+sequel.move_genre.g_genreID === category
+
+############################
+############################
+
+all_actors(actor_id, first_name, last_name)
+
+sequel.person.personID === actor_id
+sequel.person.personFirstName === first_name
+sequel.person.personLastName === last_name
+
+############################
+############################
+
+all_film_act(film_id, actor_id)
+	film_id: FK(all_films)
+	actor_id: FK(all_actors)
+
+
+
+
+
